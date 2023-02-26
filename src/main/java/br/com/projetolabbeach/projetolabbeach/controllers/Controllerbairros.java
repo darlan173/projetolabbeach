@@ -1,7 +1,7 @@
 package br.com.projetolabbeach.projetolabbeach.controllers;
 
-import br.com.projetolabbeach.projetolabbeach.models.Mbairro;
-import br.com.projetolabbeach.projetolabbeach.serveces.Sbairros;
+import br.com.projetolabbeach.projetolabbeach.models.Bairro;
+import br.com.projetolabbeach.projetolabbeach.serveces.BairroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 public class Controllerbairros {
     @Autowired
-    private Sbairros sbairros;
+    private BairroService bairroService;
 
 
 
@@ -20,8 +20,8 @@ public class Controllerbairros {
 
     }
     @PostMapping
-    public Mbairro post (@RequestBody Mbairro bairro){
-        sbairros.salvar(bairro);
+    public Bairro post (@RequestBody Bairro bairro){
+        bairroService.salvar(bairroService);
         return bairro;
 
         }
