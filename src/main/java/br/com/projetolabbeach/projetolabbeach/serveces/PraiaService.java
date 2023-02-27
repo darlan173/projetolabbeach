@@ -27,6 +27,13 @@ public class PraiaService {
     public List<Praia> findByStatus(){
         return this.praiaRepository.findAllByStatusContainingIgnoreCase("status");
     }
+    public List<Praia> findById(){
+        return this.praiaRepository.findAllByIdContainingIgnoreCase("id");
 
+    }
+    public List<Praia> findByNomePraia(){
+        return this.praiaRepository.findAllBynomePraiaContainingIgnoreCase("nomePraia");
+
+    }
 
 }

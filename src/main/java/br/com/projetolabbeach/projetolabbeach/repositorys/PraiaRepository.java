@@ -16,7 +16,11 @@ public interface PraiaRepository extends JpaRepository <Praia,Long> {
 
     List<Praia>findAllByStatusContainingIgnoreCase(String status);
 
-    }
+    List<Praia> findAllByIdContainingIgnoreCase(String id);
+
+    List<Praia> findAllBynomePraiaContainingIgnoreCase(String nomePraia);
+
+}
 
 
 

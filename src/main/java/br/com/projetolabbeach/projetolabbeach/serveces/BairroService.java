@@ -37,11 +37,13 @@ private BairroRepository bairroRepository;
             }
         }
 
-        public List<Bairro> buscarPorNome(String nomeBairro) {
-            return bairroRepository.findByNameContainingIgnoreCaseOrderByNameAsc(nomeBairro);
-        }
 
+
+    private List<Bairro> bairroRepository(String nomeBairro) {
+        return bairroRepository(nomeBairro);
     }
+
+}
 
 
 

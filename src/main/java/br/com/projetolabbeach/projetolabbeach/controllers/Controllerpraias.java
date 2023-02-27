@@ -16,97 +16,77 @@ import java.util.List;
 public class Controllerpraias {
     @Autowired
     private PraiaRepository praiaRepository;
-     @Autowired
-     private PraiaService praiaService;
-       // public Long id;
-        private List<Praia>praias= new ArrayList<>();
+    @Autowired
+    private PraiaService praiaService;
 
-        @GetMapping
-        public ResponseEntity<?> readList() {
-            return ResponseEntity.ok(praias);
-        }
+
+    private List<Praia> praias = new ArrayList<>();
+
 
     @GetMapping
-    public String get() {
+    public ResponseEntity<?> readList() {
+        return ResponseEntity.ok(praias);
+    }
 
-        public List<Praia> get(String nome) {
-            if (nomePraia != null && !nomePraia.isEmpty()) {
-                return praiaService.buscarPorNome(nomePraia);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> read(@PathVariable Long id) {
+
+        if (id != null) {
+            Praia nomePraia = findById(id);
+            if (nomePraia != null) {
+                return ResponseEntity.ok(nomePraia);
             }
-            return praiaService.buscarTodas();
         }
-        @GetMapping
-        public String get() {
-
-            public List<Praia> get (String status){
-                if (nomePraia != null && !nomePraia.isEmpty()) {
-                    return praiaService.buscarPorStatus(String propria, String impropria);
-                }
-                return praiaService.buscarStatus(status);
-            }
-
-
-            @GetMapping(value = "/{id}")
-            public ResponseEntity<?> read (@PathVariable Long id){
-                if (id != null) {
-                    Praia praiaLocalizada = findById(id);
-                    if (praiaLocalizada != null) {
-                        return ResponseEntity.ok(praiaLocalizada);
-                    }
-                }
-                return ResponseEntity.status(404).body("Praia não encontrada!");
-            }
-
-
-            @PostMapping
-            public Praia create () {
-                Praia praia = new Praia(
-
-
-                );
-                praias.add(praia);
-                bairros.add(bairro);
-                return praia;
-            }
-
-            @PutMapping
-            public Praia update (Long id, String nome, String nome_bairro){
-                Praia praiaLocalizada = findById(id);
-                if (praiaLocalizada != null) {
-                    praiaLocalizada.setNomePraia(nome);
-                    praiaLocalizada.setNomeBairro(nomeBairro);
-                }
-                return praiaLocalizada;
-            }
-
-            @DeleteMapping
-            public boolean delete (Long id){
-                Praia praiaLocalizada = findById(id);
-                if (praiaLocalizada != null) {
-                    praias.remove(praiaLocalizada);
-                    return true;
-                }
-                return false;
-            }
-
-            private Praia findById (Long id){
-                for (Praia praia : praias) {
-                    if (Praia.bairro_id().equals(id)) {
-                        return praia;
-                    }
-                }
-                return null;
-            }
-        @GetMapping("/acessibilidade")
-                public  ResponseEntity<List<Praia>>  acessibilidade(){
-                return ResponseEntity.ok(this.praiaService.findByAcessibilidade());
-            }
-            @GetMapping("/status")
-            public Optional ResponseEntity<List<Praia>> status(){
-                return ResponseEntity.ok(this.praiaService.findByStatus());
-
+        return ResponseEntity.status(404).body("Praia não cadastrada!");
     }
 
 
+    @PostMapping
+    public Praia create() {
+        Praia praia = new Praia();
+        praias.add(praia);
+        return praia;
+
+    }
+
+    private Praia findById(Long id) {
+        for (Praia praia : praias) {
+            if (praia.getId().equals(id)) {
+                return praia;
+            }
+        }
+        return null;
+    }
+
+    @PutMapping
+    public boolean update(Long id, String nomePraia) {
+        Praia praia = findById(id);
+        if (id != null) {
+            //  public Praia update(Long id, String nomePraia) {
+            Praia praiaId = findById(id);
+            if (id != null) {
+                praia.setNomePraia(nomePraia);
+                return true;
+            }
 
         }
+        return false;
+    }
+        @DeleteMapping(value="/{id}")
+       public boolean deletePath(@PathVariable Long id){
+          return false;
+        }
+
+        @GetMapping("/acessibilidade")
+        public ResponseEntity<List<Praia>> acessibilidade () {
+            return ResponseEntity.ok(this.praiaService.findByAcessibilidade());
+        }
+
+        @GetMapping("/status")
+        public ResponseEntity<List<Praia>> status () {
+            return ResponseEntity.ok(this.praiaService.findByStatus());
+
+        }
+    }
+
+

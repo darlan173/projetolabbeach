@@ -36,6 +36,13 @@ public class Praia {
     @Column(name = "status", nullable = false, length = 50)
     private String status;
 
+    public Praia() {
+
+    }
+
+    public void remove(Praia praia) {
+
+    }
 }
 
 
